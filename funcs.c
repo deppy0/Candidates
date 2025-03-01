@@ -7,15 +7,21 @@ void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 	*ptrcand2 = temp;	
 }
 
-void sortByRating(candidate_l_p list)
+void sortByRating(candidate_l_p list, int boolIncreasing)
 {
 	int i, j, mx;
 	for (i = 0; i < list->count - 1; i++)
 	{
 		mx = i;
 		for (j = i + 1; j < list->count; j++)
-			if (list->candidates[j].confidence > list->candidates[mx].confidence)
-				mx = j;
+			if (boolIncreasing)
+				if (list->candidates[j].confidence > list->candidates[mx].confidence)
+					mx = j;
+				else;
+			else
+				if (list->candidates[j].confidence < list->candidates[mx].confidence)
+					mx = j;
+				else;
 		swap(list->candidates[i], list->candidates[mx]);
 	}
 }
