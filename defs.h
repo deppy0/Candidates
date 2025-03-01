@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h"
 #include "string.h"
-#define STRING_SHORT	20 + 1
+#define STRING_SHORT	30 + 1
 #define STRING_LONG 	50 + 1
 #define CANDIDATE_MAX	20
 #define BILL_MAX		10
