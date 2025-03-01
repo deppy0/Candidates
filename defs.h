@@ -31,7 +31,7 @@ typedef struct
 	name_t		name;
 	date_t		birth;
 	str_short	position, party;
-	bill_arr	bills;
+	bill_l		bills;
 	double		confidence;
 } candidate_t, *candidate_p;
 typedef struct
