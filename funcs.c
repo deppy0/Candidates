@@ -1,5 +1,61 @@
 #include "defs.h"
 
+void parse_mmddyyyy(date_p date, str_short str)
+{
+	char t[2] = { 0 };
+	switch (date->month)
+	{
+		default: case 1:
+			strcpy(str, "January ");
+			break;
+		case 2:
+			strcpy(str, "February ");
+			break;
+		case 3:
+			strcpy(str, "March ");
+			break;
+		case 4:
+			strcpy(str, "April ");
+			break;
+		case 5:
+			strcpy(str, "May ");
+			break;
+		case 6:
+			strcpy(str, "June ");
+			break;
+		case 7:
+			strcpy(str, "July ");
+			break;
+		case 8:
+			strcpy(str, "August ");
+			break;
+		case 9:
+			strcpy(str, "September ");
+			break;
+		case 10:
+			strcpy(str, "October ");
+			break;
+		case 11:
+			strcpy(str, "November ");
+			break;
+		case 12:
+			strcpy(str, "December ");
+			break;
+	}
+	t[0] = '0' + date->day / 10 % 10;
+	strcat(str, t);
+	t[0] = '0' + date->day % 10;
+	strcat(str, t);
+	t[0] = '0' + date->year / 1000 % 10;
+	strcat(str, t);
+	t[0] = '0' + date->year / 100 % 10;
+	strcat(str, t);
+	t[0] = '0' + date->year / 10 % 10;
+	strcat(str, t);
+	t[0] = '0' + date->year % 10;
+	strcat(str, t);
+}
+
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
 	candidate_t temp = *ptrcand1;
