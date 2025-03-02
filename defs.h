@@ -1,10 +1,17 @@
+// suppress MSVC unsafe error
 #define _CRT_SECURE_NO_WARNINGS
+
 #include "stdio.h"
 #include "string.h"
+
+//Constants
+
 #define STRING_SHORT	30 + 1
 #define STRING_LONG 	50 + 1
 #define CANDIDATE_MAX	20
 #define BILL_MAX		10
+
+//Type definitions
 
 typedef char str_short[STRING_SHORT];
 typedef char str_long[STRING_LONG];
@@ -39,6 +46,10 @@ typedef struct
 	candidate_t		candidates[CANDIDATE_MAX];
 	int				count;
 } candidate_l, *candidate_l_p;
+
+//Functions
+// Functions lang na nasa PDF ilagay natin.
+// Wag na isama ung helper functions.
 
 void getName(name_p ptr);
 void getDate(date_p ptr);
