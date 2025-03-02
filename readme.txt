@@ -2,7 +2,7 @@
 
 - ang order ng pag-input is like this
 > name (last, first, middle)
-> birthday
+> birthday (month, day, year)
 > position
 > party
 > bills na napanukala
