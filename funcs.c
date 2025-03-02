@@ -22,7 +22,7 @@ void sortByRating(candidate_l_p list, int boolIncreasing)
 				if (list->candidates[j].confidence < list->candidates[mx].confidence)
 					mx = j;
 				else;
-		swap(list->candidates[i], list->candidates[mx]);
+		swap(&list->candidates[i], &list->candidates[mx]);
 	}
 }
 
@@ -41,6 +41,6 @@ void sortAlphabetical(candidate_l_p list, int boolSortAtoZ)
 				if (strcmp(list->candidates[m].name.last, list->candidates[j].name.last) < 0)
 					m = j;
 				else;
-		swap(list->candidates[i], list->candidates[m]);
+		swap(&list->candidates[i], &list->candidates[m]);
 	}
 }
