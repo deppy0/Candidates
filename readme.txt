@@ -6,4 +6,6 @@
 > position
 > party
 > bills na napanukala
+>> bill name
+>> date ng pagkapanukala (month, day, year din ang sequence)
 > confidence rate
