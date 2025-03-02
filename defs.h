@@ -40,8 +40,8 @@ typedef struct
 	int				count;
 } candidate_l, *candidate_l_p;
 
-void getName(name_ptr ptr);
-void getDate(date_ptr ptr);
+void getName(name_p ptr);
+void getDate(date_p ptr);
 void getInput(candidate_l_p list);
 void displayDate(date_t date);
 void display(candidate_t candidate);
