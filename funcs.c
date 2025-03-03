@@ -70,7 +70,7 @@ void getName(name_p ptr)
                 ptr->last[i] = ch;
                 i++;
             }
-        } while (i < 20 && ch != '\n');
+        } while (i < 30 && ch != '\n');
 
         ptr->last[i] = '\0';
 
@@ -81,12 +81,25 @@ void getName(name_p ptr)
                 ptr->first[j] = ch;
                 j++;
             }
-        } while (j < 20 && ch != '\n');
+        } while (j < 30 && ch != '\n');
 
         ptr->first[j] = '\0';
 
         scanf("%c", ptr->middle_initial);
 }
+
+void getDate(date_p ptr) {
+	scanf("Enter Month: %d", ptr->month);
+	scanf("Enter Day: %d", ptr->day);
+	scanf("Enter Year: %d", ptr->year);
+}
+
+void displayDate(date_t date) {
+	str_short date_Format;
+
+	parse_mmddyyyy(&date, date_Format);
+	printf("%s\n", date_Format);
+} 
 
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
