@@ -46,6 +46,7 @@ void parse_mmddyyyy(date_p date, str_short str)
 	strcat(str, t);
 	t[0] = '0' + date->day % 10;
 	strcat(str, t);
+	strcat(str, ", ");
 	t[0] = '0' + date->year / 1000 % 10;
 	strcat(str, t);
 	t[0] = '0' + date->year / 100 % 10;
