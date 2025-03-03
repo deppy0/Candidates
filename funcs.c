@@ -56,6 +56,37 @@ void parse_mmddyyyy(date_p date, str_short str)
 	strcat(str, t);
 }
 
+void getName(name_p ptr)
+{
+    char ch;
+    int i = 0,
+        j = 0;
+
+        do {
+            scanf("%c", &ch);
+
+            if (ch != '\n') {
+                ptr->last[i] = ch;
+                i++;
+            }
+        } while (i < 20 && ch != '\n');
+
+        ptr->last[i] = '\0';
+
+        do {
+            scanf("%c", &ch);
+
+            if (ch != '\n') {
+                ptr->first[j] = ch;
+                j++;
+            }
+        } while (j < 20 && ch != '\n');
+
+        ptr->first[j] = '\0';
+
+        scanf("%c", ptr->middle_initial);
+}
+
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
 	candidate_t temp = *ptrcand1;
