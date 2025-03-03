@@ -21,7 +21,8 @@ typedef struct
 } date_t, *date_p;
 typedef struct
 {
-	str_short last, first, mid;
+	str_short last, first;
+	char middle_initial;
 } name_t, *name_p;
 typedef struct
 {
