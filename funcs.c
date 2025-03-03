@@ -63,6 +63,7 @@ void getName(name_p ptr)
     int i = 0,
         j = 0;
 
+		printf("Enter Last Name: ");
         do {
             scanf("%c", &ch);
 
@@ -74,6 +75,7 @@ void getName(name_p ptr)
 
         ptr->last[i] = '\0';
 
+		printf("Enter First Name: ");
         do {
             scanf("%c", &ch);
 
@@ -85,13 +87,18 @@ void getName(name_p ptr)
 
         ptr->first[j] = '\0';
 
-        scanf("%c", ptr->middle_initial);
+		printf("Enter Middle Initial: ");
+        scanf("%c", &ptr->middle_initial);
 }
 
 void getDate(date_p ptr) {
-	scanf("Enter Month: %d", ptr->month);
-	scanf("Enter Day: %d", ptr->day);
-	scanf("Enter Year: %d", ptr->year);
+	
+	printf("Enter Month: ");
+	scanf("%d", &ptr->month);
+	printf("Enter Day: ");
+	scanf("%d", &ptr->day);
+	printf("Enter Year: ");
+	scanf("%d", &ptr->year);
 }
 
 void displayDate(date_t date) {
