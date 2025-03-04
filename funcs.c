@@ -101,6 +101,42 @@ void getDate(date_p ptr) {
 	scanf("%d", &ptr->year);
 }
 
+//TODO: FOR CHECKING
+void getInput(candidate_l_p ptr) {
+
+	int i = 0, j = 0;
+	do
+	{
+		printf("Name of the candidate: ");
+		getName(&ptr->candidates[i].name);
+		printf("/nBirthday: ");
+		getDate(&ptr->candidates[i].birth);
+
+		printf("/nPosition: ");
+		scanf("%s", ptr->candidates[i].position);
+		printf("/nParty: ");
+		scanf("%s", ptr->candidates[i].party);
+		
+		printf("/nBills passed: ");
+		do
+		{
+			printf("/nBill name: ");
+			scanf("%s", ptr->candidates[i].bills.bills[j].bill_name);
+			printf("/nDate the bill was passed: ");
+			getDate(&ptr->candidates[i].bills.bills->pass_date);
+
+			j++;
+		}
+		while(strcmp(ptr->candidates[i].bills.bills[j].bill_name,"!!" )!=0|| j<BILL_MAX);
+
+		printf("/nConfidence rate: ");
+		scanf("%d", ptr->candidates[i].confidence);
+
+		i++;
+	}
+	while(strcmp(ptr->candidates[i].name.last,"!!" )!=0 || i<CANDIDATE_MAX);
+}
+
 void displayDate(date_t date) {
 	str_short date_Format;
 
