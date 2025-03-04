@@ -144,6 +144,31 @@ void displayDate(date_t date) {
 	printf("%s\n", date_Format);
 } 
 
+void display(candidate_t candidate){
+
+	int j = 0;
+
+	printf("Name of the candidate: ", candidate.name);
+	printf("/nBirthday: ");
+	displayDate(candidate.birth);
+	printf("/nPosition: ", candidate.position);
+	printf("/nParty: ", candidate.party);
+	
+	printf("/nBills passed: ");
+	do
+	{
+		printf("/nBill name: ",candidate.bills.bills[j].bill_name);
+		printf("/nDate the bill was passed: ");
+		displayDate(candidate.bills.bills[j].pass_date);
+
+		j++;
+	}
+	while(j<candidate.bills.count);
+
+	printf("/nConfidence rate: ");
+	scanf("%d", candidate.confidence);
+}
+
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
 	candidate_t temp = *ptrcand1;
