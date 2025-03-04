@@ -172,12 +172,15 @@ void display(candidate_t candidate){
 void displayByParty(candidate_l list, str_short party_name)
 {
 	int i = 0;
-	while(i<list.count)
+	char key;
+	do
 	{
 		if(strcmp(party_name, list.candidates[i].party)==0)
 			display(list.candidates[i]);
+		scanf("%c", key);
 		i++;
 	}
+	while(i<list.count && key == '\n');
 }
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
