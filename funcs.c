@@ -169,6 +169,7 @@ void display(candidate_t candidate){
 	scanf("%d", candidate.confidence);
 }
 
+
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
 	candidate_t temp = *ptrcand1;
