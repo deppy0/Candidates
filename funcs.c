@@ -104,37 +104,54 @@ void getDate(date_p ptr) {
 //TODO: FOR CHECKING
 void getInput(candidate_l_p ptr) {
 
-	int i = 0, j = 0;
+	int i = 0, 
+		j = 0, 
+		terminate = 0,
+		terminate_bill = 0;
 	do
 	{
 		printf("Name of the candidate: ");
 		getName(&ptr->candidates[i].name);
-		printf("/nBirthday: ");
-		getDate(&ptr->candidates[i].birth);
 
-		printf("/nPosition: ");
-		scanf("%s", ptr->candidates[i].position);
-		printf("/nParty: ");
-		scanf("%s", ptr->candidates[i].party);
-		
-		printf("/nBills passed: ");
-		do
+		if(strcmp(ptr->candidates[i].name.last,"!!" )==0)
+			terminate = 1;
+		else
 		{
-			printf("/nBill name: ");
-			scanf("%s", ptr->candidates[i].bills.bills[j].bill_name);
-			printf("/nDate the bill was passed: ");
-			getDate(&ptr->candidates[i].bills.bills[j].pass_date);
+			
+			printf("/nBirthday: ");
+			getDate(&ptr->candidates[i].birth);
+	
+			printf("/nPosition: ");
+			scanf("%s", ptr->candidates[i].position);
+			printf("/nParty: ");
+			scanf("%s", ptr->candidates[i].party);
+			
+			printf("/nBills passed: ");
+			terminate_bill = 0; //reset
+			do
+			{
+				printf("/nBill name: ");
+				scanf("%s", ptr->candidates[i].bills.bills[j].bill_name);
 
-			j++;
+				if(strcmp(ptr->candidates[i].bills.bills[j].bill_name,"!!" )==0)
+					terminate_bill = 1;
+				else
+				{
+					printf("/nDate the bill was passed: ");
+					getDate(&ptr->candidates[i].bills.bills[j].pass_date);
+				}
+	
+				j++;
+			}
+			while(terminate_bill!=1 && j<BILL_MAX);
+	
+			printf("/nConfidence rate: ");
+			scanf("%d", ptr->candidates[i].confidence);
+	
+			i++;
 		}
-		while(strcmp(ptr->candidates[i].bills.bills[j].bill_name,"!!" )!=0 && j<BILL_MAX);
-
-		printf("/nConfidence rate: ");
-		scanf("%d", ptr->candidates[i].confidence);
-
-		i++;
 	}
-	while(strcmp(ptr->candidates[i].name.last,"!!" )!=0 && i<CANDIDATE_MAX);
+	while(terminate!=1 && i<CANDIDATE_MAX);
 }
 
 void displayDate(date_t date) {
