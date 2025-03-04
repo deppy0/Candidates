@@ -169,7 +169,7 @@ void display(candidate_t candidate){
 	scanf("%d", candidate.confidence);
 }
 
-void displayByParty(candidate_l list, str_long party_name)
+void displayByParty(candidate_l list, str_short party_name)
 {
 	int i = 0;
 	while(i<list.count)

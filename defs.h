@@ -57,7 +57,7 @@ void getDate(date_p ptr);
 void getInput(candidate_l_p list);
 void displayDate(date_t date);
 void display(candidate_t candidate);
-void displayByParty(candidate_l list, str_long party_name);
+void displayByParty(candidate_l list, str_short party_name);
 void swap(candidate_p ptrcand1, candidate_p ptrcand2);
 void sortByRating(candidate_l_p list, int boolHighestOnTop);
 void sortAlphabetical(candidate_l_p list, int boolSortAtoZ);
