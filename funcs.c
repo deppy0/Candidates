@@ -123,7 +123,7 @@ void getInput(candidate_l_p ptr) {
 			printf("/nBill name: ");
 			scanf("%s", ptr->candidates[i].bills.bills[j].bill_name);
 			printf("/nDate the bill was passed: ");
-			getDate(&ptr->candidates[i].bills.bills->pass_date);
+			getDate(&ptr->candidates[i].bills.bills[j].pass_date);
 
 			j++;
 		}
