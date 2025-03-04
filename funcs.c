@@ -127,14 +127,14 @@ void getInput(candidate_l_p ptr) {
 
 			j++;
 		}
-		while(strcmp(ptr->candidates[i].bills.bills[j].bill_name,"!!" )!=0|| j<BILL_MAX);
+		while(strcmp(ptr->candidates[i].bills.bills[j].bill_name,"!!" )!=0 && j<BILL_MAX);
 
 		printf("/nConfidence rate: ");
 		scanf("%d", ptr->candidates[i].confidence);
 
 		i++;
 	}
-	while(strcmp(ptr->candidates[i].name.last,"!!" )!=0 || i<CANDIDATE_MAX);
+	while(strcmp(ptr->candidates[i].name.last,"!!" )!=0 && i<CANDIDATE_MAX);
 }
 
 void displayDate(date_t date) {
