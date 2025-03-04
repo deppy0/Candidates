@@ -169,7 +169,16 @@ void display(candidate_t candidate){
 	scanf("%d", candidate.confidence);
 }
 
-
+void displayByParty(candidate_l list, str_long party_name)
+{
+	int i = 0;
+	while(i<list.count)
+	{
+		if(strcmp(party_name, list.candidates[i].party)==0)
+			display(list.candidates[i]);
+		i++;
+	}
+}
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
 	candidate_t temp = *ptrcand1;
