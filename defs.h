@@ -1,4 +1,4 @@
-// suppress MSVC unsafe error
+// suppress Visual Studio unsafe error for scanf()
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "stdio.h"
@@ -61,3 +61,7 @@ void displayByParty(candidate_l list, str_short party_name);
 void swap(candidate_p ptrcand1, candidate_p ptrcand2);
 void sortByRating(candidate_l_p list, int boolHighestOnTop);
 void sortAlphabetical(candidate_l_p list, int boolSortAtoZ);
+
+// Excess functions to test sorting
+void displayByRating(candidate_l list, int boolHighestOnTop);
+void displayAlphabetically(candidate_l list, int boolSortAtoZ);

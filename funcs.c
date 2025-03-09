@@ -61,97 +61,98 @@ void getName(name_p ptr)
 {
     char ch;
     int i = 0,
-        j = 0;
+        j = 0,
+        t = 0;
 
 		printf("Enter Last Name: ");
         do {
-            scanf("%c", &ch);
+        	if (i == 0)
+        		scanf(" %c", &ch);
+        	else
+            	scanf("%c", &ch);
 
             if (ch != '\n') {
                 ptr->last[i] = ch;
                 i++;
             }
         } while (i < 30 && ch != '\n');
-
+		
         ptr->last[i] = '\0';
-
-		printf("Enter First Name: ");
-        do {
-            scanf("%c", &ch);
-
-            if (ch != '\n') {
-                ptr->first[j] = ch;
-                j++;
-            }
-        } while (j < 30 && ch != '\n');
+        t += strcmp(ptr->last, "!!") == 0;
+		
+		if (t == 0)
+		{
+			printf("Enter First Name: ");
+	        do {
+	            scanf("%c", &ch);
+	
+	            if (ch != '\n') {
+	                ptr->first[j] = ch;
+	                j++;
+	            }
+	        } while (j < 30 && ch != '\n');
+	    }
 
         ptr->first[j] = '\0';
-
-		printf("Enter Middle Initial: ");
-        scanf("%c", &ptr->middle_initial);
+        t += strcmp(ptr->first, "!!") == 0;
+		
+		if (t == 0)
+		{
+			printf("Enter Middle Initial: ");
+        	scanf("%c", &ptr->middle_initial);	
+		}
 }
 
 void getDate(date_p ptr) {
 	
 	printf("Enter Month: ");
-	scanf("%d", &ptr->month);
+	scanf(" %d", &ptr->month);
 	printf("Enter Day: ");
-	scanf("%d", &ptr->day);
+	scanf(" %d", &ptr->day);
 	printf("Enter Year: ");
-	scanf("%d", &ptr->year);
+	scanf(" %d", &ptr->year);
 }
 
-//TODO: FOR CHECKING
-void getInput(candidate_l_p ptr) {
-
-	int i = 0, 
-		j = 0, 
-		terminate = 0,
-		terminate_bill = 0;
-	do
+void getInput(candidate_l_p ptr)
+{
+	int stop;
+	candidate_p c;
+	bill_p pb;
+	str_long lng = { 0 };
+	if (ptr->count < CANDIDATE_MAX)
 	{
-		printf("Name of the candidate: ");
-		getName(&ptr->candidates[i].name);
-
-		if(strcmp(ptr->candidates[i].name.last,"!!" )==0)
-			terminate = 1;
-		else
+		c = &ptr->candidates[ptr->count];
+		printf("\nName of the candidate\n\n");
+		getName(&c->name);
+		if (strcmp(c->name.last, "!!") != 0)
 		{
-			
-			printf("/nBirthday: ");
-			getDate(&ptr->candidates[i].birth);
-	
-			printf("/nPosition: ");
-			scanf("%s", ptr->candidates[i].position);
-			printf("/nParty: ");
-			scanf("%s", ptr->candidates[i].party);
-			
-			printf("/nBills passed: ");
-			terminate_bill = 0; //reset
-			do
+			printf("\nBirthday:\n");
+			getDate(&c->birth);
+			printf("\n\nPosition: ");
+			scanf(" %s", c->position);
+			printf("\nParty: ");
+			scanf(" %s", c->party);
+			for (c->bills.count = 0, stop = 0; !stop && c->bills.count < BILL_MAX; c->bills.count++)
 			{
-				printf("/nBill name: ");
-				scanf("%s", ptr->candidates[i].bills.bills[j].bill_name);
-
-				if(strcmp(ptr->candidates[i].bills.bills[j].bill_name,"!!" )==0)
-					terminate_bill = 1;
-				else
+				printf("\n\nEnter bill name, or type !! to cancel: ");
+				scanf(" %s", lng);
+				pb = &c->bills.bills[c->bills.count];
+				stop = strcmp(lng, "!!") == 0;
+				if (!stop)
 				{
-					printf("/nDate the bill was passed: ");
-					getDate(&ptr->candidates[i].bills.bills[j].pass_date);
+					strcpy(pb->bill_name, lng);
+					printf("\nBill pass date:\n\n");
+					getDate(&pb->pass_date);
 				}
-	
-				j++;
+				else c->bills.count--;
 			}
-			while(terminate_bill!=1 && j<BILL_MAX);
-	
-			printf("/nConfidence rate: ");
-			scanf("%d", ptr->candidates[i].confidence);
-	
-			i++;
+			printf("\nConfidence rate: ");
+			scanf(" %lf", &c->confidence);
+			ptr->count++;
 		}
 	}
-	while(terminate!=1 && i<CANDIDATE_MAX);
+	else
+		printf("You cannot add more candidates.\n");
 }
 
 void displayDate(date_t date) {
@@ -165,40 +166,75 @@ void display(candidate_t candidate){
 
 	int j = 0;
 
-	printf("Name of the candidate: ", candidate.name);
-	printf("/nBirthday: ");
+	printf("\nName of the candidate: %s %s %c", candidate.name.last, candidate.name.first, candidate.name.middle_initial);
+	printf("\nBirthday: ");
 	displayDate(candidate.birth);
-	printf("/nPosition: ", candidate.position);
-	printf("/nParty: ", candidate.party);
+	printf("\nPosition: %s", candidate.position);
+	printf("\nParty: %s", candidate.party);
 	
-	printf("/nBills passed: ");
+	printf("\nBills passed: ");
 	do
 	{
-		printf("/nBill name: ",candidate.bills.bills[j].bill_name);
-		printf("/nDate the bill was passed: ");
+		printf("\nBill name: %s",candidate.bills.bills[j].bill_name);
+		printf("\nDate the bill was passed: ");
 		displayDate(candidate.bills.bills[j].pass_date);
 
 		j++;
 	}
 	while(j<candidate.bills.count);
 
-	printf("/nConfidence rate: ");
-	scanf("%d", candidate.confidence);
+	printf("\nConfidence rate: %.2lf\n", candidate.confidence);
+}
+
+void displayByRating(candidate_l list, int boolHighestOnTop)
+{
+	int i;
+	char key = ' ';
+	sortByRating(&list, boolHighestOnTop);
+	printf("\n===== START OF LIST =====\n");
+	for (i = 0; i < list.count && key != 'Q' && key != 'q'; i++)
+	{
+		display(list.candidates[i]);
+		printf("\nEnter any key to continue, or enter Q to quit: ");
+		scanf(" %c", &key);
+	}
+	printf("\n===== END OF LIST =====\n");
+}
+
+void displayAlphabetically(candidate_l list, int boolSortAtoZ)
+{
+	int i;
+	char key = ' ';
+	sortAlphabetical(&list, boolSortAtoZ);
+	printf("\n===== START OF LIST =====\n");
+	for (i = 0; i < list.count && key != 'Q' && key != 'q'; i++)
+	{
+		display(list.candidates[i]);
+		printf("\nEnter any key to continue, or enter Q to quit: ");
+		scanf(" %c", &key);
+	}
+	printf("\n===== END OF LIST =====\n");
 }
 
 void displayByParty(candidate_l list, str_short party_name)
 {
 	int i = 0;
-	char key;
+	char key = ' ';
+	printf("\n===== START OF LIST =====\n");
 	do
 	{
-		if(strcmp(party_name, list.candidates[i].party)==0)
+		if (strcmp(party_name, list.candidates[i].party) == 0)
+		{
 			display(list.candidates[i]);
-		scanf("%c", key);
+			printf("\nEnter any key to continue, or enter Q to quit: ");
+			scanf(" %c", &key);
+		}
 		i++;
 	}
-	while(i<list.count && key == '\n');
+	while(i<list.count && key != 'Q' && key != 'q');
+	printf("\n===== END OF LIST =====\n");
 }
+
 void swap(candidate_p ptrcand1, candidate_p ptrcand2)
 {
 	candidate_t temp = *ptrcand1;
